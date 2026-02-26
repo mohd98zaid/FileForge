@@ -1,0 +1,79 @@
+{
+    "Index": {
+        "title": "All-in-One File Tools That Just Work",
+        "subtitle": "Image, PDF, Audio, Video & Developer tools. Privacy-first — no signup, no limits, works in your browser.",
+        "searchPlaceholder": "Search tools (e.g., 'resize', 'audio', 'markdown')...",
+        "browseAll": "Browse All Tools",
+        "noResults": "No tools found matching \"{query}\".",
+        "searchResults": "Search Results ({count})",
+        "imageTools": "Image Tools",
+        "pdfTools": "PDF Tools",
+        "ocrTools": "OCR / Text Extraction",
+        "audioTools": "Audio & Video Tools",
+        "devTools": "Developer & Utilities",
+        "serverLabel": "Server",
+        "heroBadge": "100% Free & No Sign-up Required",
+        "studentsExams": "Students & Exams",
+        "creatorsDesigners": "Creators & Designers",
+        "statsTools": "Tools",
+        "statsAI": "AI Used",
+        "statsAIValue": "Zero",
+        "statsCost": "Cost",
+        "statsCostValue": "Free",
+        "statsSignup": "Sign-up",
+        "statsSignupValue": "None"
+    },
+    "Navigation": {
+        "image": "Image",
+        "pdf": "PDF",
+        "audio": "Audio",
+        "dev": "Developer",
+        "about": "About"
+    },
+    "Layout": {
+        "imageTools": "Image Tools",
+        "pdfTools": "PDF Tools",
+        "audioDevTools": "Audio & Dev Tools",
+        "footerDesc": "Free, open-source image & PDF processing tools. No sign-up. No AI. Just code.",
+        "aboutPrivacy": "→ About Us & Privacy",
+        "copyright": "© {year} FileForge. All rights reserved.",
+        "moreTools": "More Tools",
+        "faqTitle": "Frequently Asked Questions"
+    },
+    "Common": {
+        "download": "Download",
+        "process": "Process",
+        "processing": "Processing...",
+        "uploadLabel": "Drop file here or browse",
+        "uploadHint": "Max file size: 10 MB",
+        "clientSide": "⚡ Processed in your browser (Fast & Private)",
+        "error": "Something went wrong",
+        "original": "Original",
+        "result": "Result",
+        "saved": "Saved",
+        "comingSoon": "Coming Soon",
+        "dropPdfHere": "Drop PDF Here",
+        "dropPdfsHere": "Drop PDFs here (at least 2)",
+        "hintMerge": "Max 100 MB each",
+        "size": "Size",
+        "errorTooManyFiles": "Only {maxFiles} file(s) supported.",
+        "errorFileTooLarge": "File too large. Max size is {sizeStr}.",
+        "errorInvalidFile": "Invalid file."
+    },
+    "Personas": {
+        "students": {
+            "title": "Tools for Students",
+            "subtitle": "Everything you need for exams, assignments, and study materials.",
+            "examPrep": "Exam Prep",
+            "assignments": "Assignments & Notes",
+            "utilities": "Study Utilities"
+        },
+        "creators": {
+            "title": "Tools for Creators",
+            "subtitle": "Design, edit, and optimize content for social media and web.",
+            "visuals": "Visual Content",
+            "branding": "Branding & Prep",
+            "utils": "Web Utilities"
+        }
+    }
+}

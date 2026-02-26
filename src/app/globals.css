@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ──────────────────────────────────────────────── */
+:root {
+  --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+  --gradient-dark: linear-gradient(135deg, #0f172a, #1e293b);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #020617;
+  color: #e2e8f0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Glass card ────────────────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-indigo-500/25 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/30 active:scale-95;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 backdrop-blur-sm;
+  }
+
+  .tool-card {
+    @apply glass-card cursor-pointer transition-all duration-300 hover:border-indigo-500/40 hover:bg-white/10 hover:shadow-indigo-500/10 hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent;
+  }
+
+  .dropzone {
+    @apply flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/20 bg-white/[0.02] p-10 text-center transition-all duration-300 cursor-pointer hover:border-indigo-500/50 hover:bg-indigo-500/5;
+  }
+
+  .dropzone-active {
+    @apply border-indigo-400 bg-indigo-500/10 scale-[1.02];
+  }
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}

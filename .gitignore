@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+jspdf/
+
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+.tsbuildinfo
+
+# Production / Build
+dist/
+build/
+.env.local
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Debugging
+.vercel
+.turbo
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.settings/
+.classpath
+.eslintcache
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary & Local Files
+tmp/
+temp/
+*.tmp
+*.pdf
+*.bak
+*.txt
+workingCodeOfDependendOnBackend.zip
+ilovepdf_docs.html
+test_adobe.js
+sitemap_utf8.xml
+
+# Misc
+*.pem
+bu*.txt
+*.zip
+
+# Platform-specific
+node_modules/sharp

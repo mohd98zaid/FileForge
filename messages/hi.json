@@ -1,0 +1,79 @@
+{
+    "Index": {
+        "title": "सभी फ़ाइल टूल्स, एक जगह",
+        "subtitle": "इमेज, PDF, ऑडियो, वीडियो और डेवलपर टूल्स। आपकी प्राइवेसी सबसे पहले — कोई साइन-अप नहीं, कोई लिमिट नहीं, सब कुछ ब्राउज़र में।",
+        "searchPlaceholder": "टूल खोजें जैसे 'रिसाइज़', 'PDF', 'ऑडियो'...",
+        "browseAll": "सभी टूल्स देखें",
+        "noResults": "\"{query}\" से मिलता-जुलता कोई टूल नहीं मिला।",
+        "searchResults": "खोज के नतीजे ({count})",
+        "imageTools": "इमेज टूल्स",
+        "pdfTools": "PDF टूल्स",
+        "ocrTools": "OCR / टेक्स्ट निकालें",
+        "audioTools": "ऑडियो और वीडियो टूल्स",
+        "devTools": "डेवलपर और यूटिलिटी",
+        "serverLabel": "सर्वर",
+        "heroBadge": "100% मुफ़्त — कोई साइन-अप नहीं",
+        "studentsExams": "छात्र और परीक्षा",
+        "creatorsDesigners": "क्रिएटर्स और डिज़ाइनर्स",
+        "statsTools": "टूल्स",
+        "statsAI": "AI का उपयोग",
+        "statsAIValue": "शून्य",
+        "statsCost": "कीमत",
+        "statsCostValue": "बिल्कुल मुफ़्त",
+        "statsSignup": "साइन-अप",
+        "statsSignupValue": "ज़रूरत नहीं"
+    },
+    "Navigation": {
+        "image": "इमेज",
+        "pdf": "PDF",
+        "audio": "ऑडियो",
+        "dev": "डेवलपर",
+        "about": "हमारे बारे में"
+    },
+    "Layout": {
+        "imageTools": "इमेज टूल्स",
+        "pdfTools": "PDF टूल्स",
+        "audioDevTools": "ऑडियो और डेवलपर टूल्स",
+        "footerDesc": "मुफ़्त, ओपन-सोर्स इमेज और PDF टूल्स। कोई साइन-अप नहीं। कोई AI नहीं। बस कोड।",
+        "aboutPrivacy": "→ हमारे बारे में और प्राइवेसी",
+        "copyright": "© {year} FileForge. सभी अधिकार सुरक्षित।",
+        "moreTools": "और टूल्स",
+        "faqTitle": "अक्सर पूछे जाने वाले सवाल"
+    },
+    "Common": {
+        "download": "डाउनलोड करें",
+        "process": "शुरू करें",
+        "processing": "प्रोसेस हो रहा है...",
+        "uploadLabel": "फ़ाइल यहाँ ड्रॉप करें या ब्राउज़ करें",
+        "uploadHint": "एक फ़ाइल की अधिकतम साइज़: 10 MB",
+        "clientSide": "⚡ आपके ब्राउज़र में प्रोसेस होता है (तेज़ और सुरक्षित)",
+        "error": "कुछ गलत हो गया",
+        "original": "असली",
+        "result": "नतीजा",
+        "saved": "बचत",
+        "comingSoon": "जल्द आ रहा है",
+        "dropPdfHere": "PDF यहाँ ड्रॉप करें",
+        "dropPdfsHere": "यहाँ PDF फ़ाइलें ड्रॉप करें (कम से कम 2)",
+        "hintMerge": "अधिकतम 100 MB प्रति फ़ाइल",
+        "size": "साइज़",
+        "errorTooManyFiles": "केवल {maxFiles} फ़ाइलें समर्थित हैं।",
+        "errorFileTooLarge": "फ़ाइल बहुत बड़ी है। अधिकतम आकार {sizeStr} है।",
+        "errorInvalidFile": "अमान्य फ़ाइल।"
+    },
+    "Personas": {
+        "students": {
+            "title": "छात्रों के लिए टूल्स",
+            "subtitle": "परीक्षा, असाइनमेंट और पढ़ाई के लिए ज़रूरी सब कुछ।",
+            "examPrep": "परीक्षा तैयारी",
+            "assignments": "असाइनमेंट और नोट्स",
+            "utilities": "स्टडी यूटिलिटीज़"
+        },
+        "creators": {
+            "title": "क्रिएटर्स के लिए टूल्स",
+            "subtitle": "सोशल मीडिया और वेब कंटेंट को डिज़ाइन, एडिट और ऑप्टिमाइज़ करें।",
+            "visuals": "विज़ुअल कंटेंट",
+            "branding": "ब्रांडिंग और तैयारी",
+            "utils": "वेब यूटिलिटीज़"
+        }
+    }
+}
