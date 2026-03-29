@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile, unlink, readFile } from "fs/promises";
 import { join } from "path";
 import * as os from "os";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
+    const rateLimited = rateLimit(req);
+    if (rateLimited) return rateLimited;
+
     let inputFilePath = "";
 
     try {
@@ -14,7 +18,15 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
         }
 
-        const clientId = process.env.NEXT_PUBLIC_ADOBE_CLIENT_ID;
+        const MAX_SIZE = 50 * 1024 * 1024;
+        if (file.size > MAX_SIZE) {
+            return NextResponse.json({ error: "File too large. Maximum 50MB." }, { status: 400 });
+        }
+        if (file.type !== 'application/pdf') {
+            return NextResponse.json({ error: "Only PDF files are accepted." }, { status: 400 });
+        }
+
+        const clientId = process.env.ADOBE_CLIENT_ID;
         const clientSecret = process.env.ADOBE_CLIENT_SECRET;
 
         if (!clientId || !clientSecret) {
@@ -37,8 +49,9 @@ export async function POST(req: NextRequest) {
         const authHeader = `Bearer ${access_token}`;
 
         // 2. Save file temporarily
+        const sanitizedName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').substring(0, 100);
         const tempDir = os.tmpdir();
-        inputFilePath = join(tempDir, `input_${Date.now()}_${file.name}`);
+        inputFilePath = join(tempDir, `input_${Date.now()}_${sanitizedName}`);
         await writeFile(inputFilePath, Buffer.from(await file.arrayBuffer()));
 
         // 3. Get upload URI
@@ -88,13 +101,13 @@ export async function POST(req: NextRequest) {
             status: 200,
             headers: {
                 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'Content-Disposition': `attachment; filename="${file.name.replace(".pdf", "")}.xlsx"`,
+                'Content-Disposition': `attachment; filename="${sanitizedName.replace(/\.pdf$/i, '')}.xlsx"`,
             }
         });
 
     } catch (error: any) {
         console.error("Adobe PDF→XLSX Error:", error);
-        return NextResponse.json({ error: error?.message || "Conversion failed" }, { status: 500 });
+        return NextResponse.json({ error: "Failed to convert document. Please try again." }, { status: 500 });
     } finally {
         if (inputFilePath) await unlink(inputFilePath).catch(() => { });
     }

@@ -17,8 +17,7 @@ export default function LocaleSwitcher({ currentLocale }: Props) {
     const toggleLocale = () => {
         const nextLocale = isHi ? "en" : "hi";
         startTransition(() => {
-            // @ts-ignore
-            router.replace(pathname, { locale: nextLocale });
+            (router as any).replace(pathname, { locale: nextLocale });
         });
     };
 

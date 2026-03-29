@@ -18,7 +18,7 @@ _Free · Open Source · No Sign-up · Privacy First_
 
 ## 🌟 Introduction
 
-**FileForge** is an advanced, modern, browser-based file utility platform offering **40+ intelligent tools** for handling images, PDFs, audio, video, and developer tasks. Built with a mobile-first approach, it caters to specific regional requirements (like Indian SSC, UPSC, Railway exam photo standards) and comprehensive global utility needs.
+**FileForge** is an advanced, modern, browser-based file utility platform offering **120+ intelligent tools** for handling images, PDFs, audio, video, developer tasks, AI vision, calculators, and productivity needs. Built with a mobile-first approach, it caters to specific regional requirements (like Indian SSC, UPSC, Railway exam photo standards) and comprehensive global utility needs.
 
 ### 🎯 Core Philosophy
 
@@ -101,6 +101,7 @@ graph TD
 | Layer                     | Technology                      | Purpose                                               |
 | :------------------------ | :------------------------------ | :---------------------------------------------------- |
 | **Framework**             | Next.js 16 (App Router)         | Core application routing, SSR, and API routes.        |
+
 | **Language**              | TypeScript                      | Type safety and robust codebase maintenance.          |
 | **Styling**               | Tailwind CSS                    | Rapid UI development with responsive utility classes. |
 | **i18n**                  | `next-intl`                     | Seamless bilingual experience (English & Hindi).      |
@@ -130,7 +131,7 @@ graph TD
 ```bash
 # Clone the repository
 git clone https://github.com/mohd98zaid/FileForge.git
-cd FileForge/FileForge_frontend
+cd FileForge/FileForge
 
 # Install all dependencies
 npm install
@@ -162,17 +163,22 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 ## 📁 Repository Structure
 
 ```
-FileForge_frontend/
-├── public/                 # Static static resources & manifest
+FileForge/
+├── public/                 # Static resources & manifest
 ├── messages/               # Localization strings (en.json, hi.json)
 ├── src/
-│   ├── app/                # Next.js 14 App Router layout
-│   │   ├── [locale]/       # Internationalized routes per tool
+│   ├── app/                # Next.js 16 App Router layout
+│   │   ├── [locale]/       # Internationalized routes per tool (120+ tools)
 │   │   └── api/            # Serverless API logic
 │   ├── components/         # Shared, reusable React UI components
+│   ├── features/           # Feature-specific modules
+│   ├── i18n/               # Internationalization configuration
 │   ├── lib/                # Configuration arrays (tools list, SEO definitions)
+│   ├── types/              # TypeScript type definitions
 │   ├── utils/              # Functional pure extraction (image/audio logic)
 │   └── middleware.ts       # Route handler for locale redirections
+├── scripts/                # Build and utility scripts
+├── tools/                  # Additional tool configurations
 └── tailwind.config.js      # Global styling configuration
 ```
 

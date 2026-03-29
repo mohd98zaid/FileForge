@@ -34,7 +34,7 @@
         "imageTools": "Image Tools",
         "pdfTools": "PDF Tools",
         "audioDevTools": "Audio & Dev Tools",
-        "footerDesc": "Free, open-source image & PDF processing tools. No sign-up. No AI. Just code.",
+        "footerDesc": "Free, open-source tools with AI-powered features. No sign-up required.",
         "aboutPrivacy": "→ About Us & Privacy",
         "copyright": "© {year} FileForge. All rights reserved.",
         "moreTools": "More Tools",
@@ -58,7 +58,8 @@
         "size": "Size",
         "errorTooManyFiles": "Only {maxFiles} file(s) supported.",
         "errorFileTooLarge": "File too large. Max size is {sizeStr}.",
-        "errorInvalidFile": "Invalid file."
+        "errorInvalidFile": "Invalid file.",
+        "removeFile": "Remove file"
     },
     "Personas": {
         "students": {

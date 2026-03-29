@@ -34,7 +34,7 @@
         "imageTools": "इमेज टूल्स",
         "pdfTools": "PDF टूल्स",
         "audioDevTools": "ऑडियो और डेवलपर टूल्स",
-        "footerDesc": "मुफ़्त, ओपन-सोर्स इमेज और PDF टूल्स। कोई साइन-अप नहीं। कोई AI नहीं। बस कोड।",
+        "footerDesc": "AI-संचालित फ़ीचर्स के साथ मुफ़्त, ओपन-सोर्स टूल्स। कोई साइन-अप की ज़रूरत नहीं।",
         "aboutPrivacy": "→ हमारे बारे में और प्राइवेसी",
         "copyright": "© {year} FileForge. सभी अधिकार सुरक्षित।",
         "moreTools": "और टूल्स",
@@ -58,7 +58,8 @@
         "size": "साइज़",
         "errorTooManyFiles": "केवल {maxFiles} फ़ाइलें समर्थित हैं।",
         "errorFileTooLarge": "फ़ाइल बहुत बड़ी है। अधिकतम आकार {sizeStr} है।",
-        "errorInvalidFile": "अमान्य फ़ाइल।"
+        "errorInvalidFile": "अमान्य फ़ाइल।",
+        "removeFile": "फ़ाइल हटाएँ"
     },
     "Personas": {
         "students": {

@@ -1,5 +1,4 @@
 // import { removeBackground } from "@imgly/background-removal";
-import { compressImage } from "./image-processing";
 
 export interface PassportSpec {
     label: string;

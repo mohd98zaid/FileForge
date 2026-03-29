@@ -17,6 +17,7 @@ interface FileUploadProps {
      * When undefined/false the component manages its own "selected" state.
      */
     hasFiles?: boolean;
+    compact?: boolean;
 }
 
 function formatSize(bytes: number) {
@@ -33,6 +34,7 @@ export default function FileUpload({
     label,
     hint,
     hasFiles,
+    compact,
 }: FileUploadProps) {
     const t = useTranslations("Common");
     const defaultLabel = label || t("uploadLabel");
@@ -118,7 +120,7 @@ export default function FileUpload({
                         </div>
                         <button
                             onClick={handleClear}
-                            title="Remove file"
+                            title={t("removeFile")}
                             className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full text-slate-400 hover:bg-red-500/20 hover:text-red-400 transition-all"
                         >
                             ✕
@@ -137,11 +139,13 @@ export default function FileUpload({
                 className={`dropzone ${isDragActive ? "dropzone-active" : ""}`}
             >
                 <input {...getInputProps()} />
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
-                    <svg className="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-                    </svg>
-                </div>
+                {!compact && (
+                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+                        <svg className="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                    </div>
+                )}
                 <p className="text-base font-medium text-slate-300">{defaultLabel}</p>
                 <p className="mt-1 text-sm text-slate-500">{defaultHint}</p>
             </div>

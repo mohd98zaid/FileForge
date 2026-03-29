@@ -24,10 +24,11 @@ export async function changeDpi(file: File, dpi: number): Promise<Blob> {
     }
 
     // Convert ArrayBuffer to binary string (required by piexifjs)
-    let binary = "";
     const bytes = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < bytes.byteLength; i++) {
-        binary += String.fromCharCode(bytes[i]);
+    let binary = "";
+    const CHUNK = 8192;
+    for (let i = 0; i < bytes.byteLength; i += CHUNK) {
+        binary += String.fromCharCode(...bytes.subarray(i, Math.min(i + CHUNK, bytes.byteLength)));
     }
 
     // Get existing EXIF or create new
@@ -60,34 +61,40 @@ export async function changeDpi(file: File, dpi: number): Promise<Blob> {
 async function convertToJpegAndSetDpi(file: File, dpi: number): Promise<Blob> {
     return new Promise((resolve, reject) => {
         const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
         img.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            if (!ctx) return reject("Canvas error");
+            URL.revokeObjectURL(objectUrl);
+            try {
+                const canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext("2d");
+                if (!ctx) return reject("Canvas error");
 
-            // Draw white background for transparency handling
-            ctx.fillStyle = "#fff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0);
+                // Draw white background for transparency handling
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
 
-            const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+                const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
 
-            // Now inject DPI into this new JPEG
-            // Helper to strip "data:image/jpeg;base64,"
-            const exifObj: any = { "0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": null };
-            exifObj["0th"][piexif.ImageIFD.XResolution] = [dpi, 1];
-            exifObj["0th"][piexif.ImageIFD.YResolution] = [dpi, 1];
-            exifObj["0th"][piexif.ImageIFD.ResolutionUnit] = 2;
+                const exifObj: any = { "0th": {}, "Exif": {}, "GPS": {}, "1st": {}, "thumbnail": null };
+                exifObj["0th"][piexif.ImageIFD.XResolution] = [dpi, 1];
+                exifObj["0th"][piexif.ImageIFD.YResolution] = [dpi, 1];
+                exifObj["0th"][piexif.ImageIFD.ResolutionUnit] = 2;
 
-            const exifBytes = piexif.dump(exifObj);
-            const newJpeg = piexif.insert(exifBytes, dataUrl);
+                const exifBytes = piexif.dump(exifObj);
+                const newJpeg = piexif.insert(exifBytes, dataUrl);
 
-            // Convert Base64 (newJpeg) to Blob
-            fetch(newJpeg).then(res => res.blob()).then(resolve).catch(reject);
+                fetch(newJpeg).then(res => res.blob()).then(resolve).catch(reject);
+            } catch (err) {
+                reject(err);
+            }
         };
-        img.onerror = reject;
-        img.src = URL.createObjectURL(file);
+        img.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            reject("Image load error");
+        };
+        img.src = objectUrl;
     });
 }

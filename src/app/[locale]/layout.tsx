@@ -109,7 +109,7 @@ const organizationLd = {
     url: BASE_URL,
     logo: `${BASE_URL}/logo.png`,
     description:
-        "Free, open-source image & PDF processing tools. No sign-up. No AI. Just code.",
+        "Free, open-source image & PDF processing tools with AI-powered features. No sign-up required.",
 };
 
 
@@ -129,6 +129,7 @@ export default async function RootLayout({
     const messages = await getMessages();
     const tLayout = await getTranslations('Layout');
     const tNav = await getTranslations('Navigation');
+    const isHi = locale === 'hi';
 
     return (
         <html lang={locale} className="dark">
@@ -168,9 +169,10 @@ export default async function RootLayout({
                                     <div className="hidden md:flex items-center gap-6 text-sm">
                                         <Link href={"/#image-tools" as any} className="text-slate-400 hover:text-white transition-colors">{tNav('image')}</Link>
                                         <Link href={"/#pdf-tools" as any} className="text-slate-400 hover:text-white transition-colors">{tNav('pdf')}</Link>
-                                        <Link href={"/#office-tools" as any} className="text-slate-400 hover:text-white transition-colors">Office</Link>
+                                        <Link href={"/#office-tools" as any} className="text-slate-400 hover:text-white transition-colors">{isHi ? 'ऑफ़िस' : 'Office'}</Link>
                                         <Link href={"/#audio-tools" as any} className="text-slate-400 hover:text-white transition-colors">{tNav('audio')}</Link>
                                         <Link href={"/#dev-tools" as any} className="text-slate-400 hover:text-white transition-colors">{tNav('dev')}</Link>
+                                        <Link href={"/#ai-tools" as any} className="text-slate-400 hover:text-indigo-400 transition-colors">AI</Link>
                                         <Link href="/about" className="text-slate-400 hover:text-white transition-colors">{tNav('about')}</Link>
                                     </div>
                                     <div className="flex gap-2">

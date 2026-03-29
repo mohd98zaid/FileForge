@@ -17,7 +17,7 @@ export default function ProgressBar({ progress, label }: ProgressBarProps) {
                     style={{ width: `${Math.min(progress, 100)}%` }}
                 />
             </div>
-            <p className="mt-1 text-right text-xs text-slate-500">{Math.round(progress)}%</p>
+            <p className="mt-1 text-right text-xs text-slate-500">{Math.min(Math.round(progress), 100)}%</p>
         </div>
     );
 }

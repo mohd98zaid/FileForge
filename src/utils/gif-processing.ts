@@ -37,17 +37,21 @@ export async function createGif(
         const images: HTMLImageElement[] = [];
 
         // Load all images first
+        const objectUrls: string[] = [];
         files.forEach((file, index) => {
             const img = new Image();
             img.onload = () => {
                 images[index] = img;
                 loadedCount++;
                 if (loadedCount === files.length) {
+                    objectUrls.forEach(url => URL.revokeObjectURL(url));
                     processImages(gif, images, delayMs, resolve, reject);
                 }
             };
             img.onerror = () => reject(`Failed to load image ${file.name}`);
-            img.src = URL.createObjectURL(file);
+            const url = URL.createObjectURL(file);
+            objectUrls.push(url);
+            img.src = url;
         });
     });
 }

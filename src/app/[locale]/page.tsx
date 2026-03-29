@@ -57,7 +57,14 @@ export default function Home() {
     const officeTools = ALL_TOOLS.filter((t) => t.category === "office");
     const ocrTools = ALL_TOOLS.filter((t) => t.category === "ocr");
     const audioTools = ALL_TOOLS.filter((t) => t.category === "audio");
-    const devTools = ALL_TOOLS.filter((t) => t.category === "dev");
+    const videoTools = ALL_TOOLS.filter((t) => t.category === "video");
+    const devTools = ALL_TOOLS.filter((t) => ["dev", "developer", "generators"].includes(t.category));
+    const designTools = ALL_TOOLS.filter((t) => t.category === "design");
+    const productivityTools = ALL_TOOLS.filter((t) => ["productivity", "time"].includes(t.category));
+    const calculatorsTools = ALL_TOOLS.filter((t) => ["calculators", "finance"].includes(t.category));
+    const securityTools = ALL_TOOLS.filter((t) => t.category === "security");
+    const archiveTools = ALL_TOOLS.filter((t) => t.category === "archive");
+    const aiTools = ALL_TOOLS.filter((t) => t.category === "ai");
 
     return (
         <div className="animate-fade-in">
@@ -98,6 +105,14 @@ export default function Home() {
                     <Link href={"/for/creators" as any} className="group px-5 py-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 hover:bg-cyan-500/20 hover:border-cyan-500/40 transition-all flex items-center gap-2">
                         <span className="text-xl group-hover:scale-110 transition-transform">🎨</span>
                         <span className="font-medium">{t('creatorsDesigners')}</span>
+                    </Link>
+                    <Link href={"/for/developers" as any} className="group px-5 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition-all flex items-center gap-2">
+                        <span className="text-xl group-hover:scale-110 transition-transform">👨‍💻</span>
+                        <span className="font-medium">{isHi ? "डेवलपर्स" : "Developers"}</span>
+                    </Link>
+                    <Link href={"/for/business" as any} className="group px-5 py-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/40 transition-all flex items-center gap-2">
+                        <span className="text-xl group-hover:scale-110 transition-transform">💼</span>
+                        <span className="font-medium">{isHi ? "व्यवसाय" : "Business"}</span>
                     </Link>
                 </div>
             </section>
@@ -162,6 +177,69 @@ export default function Home() {
                             {devTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
                         </div>
                     </section>
+                    
+                    {videoTools.length > 0 && (
+                    <section id="video-tools" className="mt-16">
+                        <h2 className="section-title mb-8">🎞️ {isHi ? 'वीडियो टूल्स' : 'Video Tools'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {videoTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
+
+                    {designTools.length > 0 && (
+                    <section id="design-tools" className="mt-16">
+                        <h2 className="section-title mb-8">🎨 {isHi ? 'डिज़ाइन टूल्स' : 'Design Tools'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {designTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
+
+                    {productivityTools.length > 0 && (
+                    <section id="productivity-tools" className="mt-16">
+                        <h2 className="section-title mb-8">⏱️ {isHi ? 'प्रोडक्टिविटी' : 'Productivity & Time'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {productivityTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
+
+                    {calculatorsTools.length > 0 && (
+                    <section id="calculators-tools" className="mt-16">
+                        <h2 className="section-title mb-8">🧮 {isHi ? 'कैलकुलेटर' : 'Calculators & Math'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {calculatorsTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
+
+                    {securityTools.length > 0 && (
+                    <section id="security-tools" className="mt-16">
+                        <h2 className="section-title mb-8">🔐 {isHi ? 'सुरक्षा टूल्स' : 'Security Tools'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {securityTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
+
+                    {archiveTools.length > 0 && (
+                    <section id="archive-tools" className="mt-16">
+                        <h2 className="section-title mb-8">📦 {isHi ? 'आर्काइव टूल्स' : 'Archive Tools'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {archiveTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
+
+                    {aiTools.length > 0 && (
+                    <section id="ai-tools" className="mt-16">
+                        <h2 className="section-title mb-8">🤖 {isHi ? 'AI विज़न' : 'Edge AI Vision'}</h2>
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {aiTools.map((tool) => <ToolCard key={tool.href} tool={tool} isHi={isHi} serverLabel={t('serverLabel')} />)}
+                        </div>
+                    </section>
+                    )}
                 </>
             )}
 

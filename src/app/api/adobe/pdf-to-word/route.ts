@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile, unlink, readFile } from "fs/promises";
 import { join } from "path";
 import * as os from "os";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
+    const rateLimited = rateLimit(req);
+    if (rateLimited) return rateLimited;
+
     let inputFilePath = "";
     let outputFilePath = "";
 
@@ -15,7 +19,15 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
         }
 
-        const clientId = process.env.NEXT_PUBLIC_ADOBE_CLIENT_ID;
+        const MAX_SIZE = 50 * 1024 * 1024;
+        if (file.size > MAX_SIZE) {
+            return NextResponse.json({ error: "File too large. Maximum 50MB." }, { status: 400 });
+        }
+        if (file.type !== 'application/pdf') {
+            return NextResponse.json({ error: "Only PDF files are accepted." }, { status: 400 });
+        }
+
+        const clientId = process.env.ADOBE_CLIENT_ID;
         const clientSecret = process.env.ADOBE_CLIENT_SECRET;
 
         if (!clientId || !clientSecret) {
@@ -44,8 +56,9 @@ export async function POST(req: NextRequest) {
         const authHeader = `Bearer ${access_token}`;
 
         // Create temporary file paths
+        const sanitizedName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').substring(0, 100);
         const tempDir = process.env.TEMP || process.env.TMPDIR || os.tmpdir() || '/tmp';
-        inputFilePath = join(tempDir, `input_${Date.now()}_${file.name}`);
+        inputFilePath = join(tempDir, `input_${Date.now()}_${sanitizedName}`);
         outputFilePath = join(tempDir, `output_${Date.now()}_adobe.docx`);
 
         // Save uploaded file temporarily
@@ -119,18 +132,19 @@ export async function POST(req: NextRequest) {
         const outputBuffer = await downloadRes.arrayBuffer();
 
         // 7. Return to client
+        const safeOutputName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').replace(/\.pdf$/i, '').substring(0, 80);
         return new NextResponse(outputBuffer, {
             status: 200,
             headers: {
                 'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'Content-Disposition': `attachment; filename="${file.name.replace(".pdf", "")}.docx"`,
+                'Content-Disposition': `attachment; filename="${safeOutputName}.docx"`,
             }
         });
 
     } catch (error: any) {
         console.error("Adobe API Error:", error);
         return NextResponse.json(
-            { error: error?.message || "Failed to process document with Adobe Services" },
+            { error: "Failed to process document. Please try again." },
             { status: 500 }
         );
     } finally {

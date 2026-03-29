@@ -69,14 +69,13 @@ export default function EsignPdfPage() {
     // Load pdf.js
     useEffect(() => {
         if (typeof window === "undefined") return;
-        const script = document.createElement("script");
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-        script.onload = () => {
-            const pdfjs = (window as any).pdfjsLib;
-            pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        (async () => {
+            const pdfjs = await import("pdfjs-dist");
+            pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+                "pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url
+            ).toString();
             pdfjsRef.current = pdfjs;
-        };
-        document.head.appendChild(script);
+        })();
     }, []);
 
     const renderPdfPage = useCallback(async (pageNum: number) => {

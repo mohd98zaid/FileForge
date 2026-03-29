@@ -1,118 +1,133 @@
 "use client";
 
-import { useLocale } from "next-intl";
-
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import ToolLayout from "@/components/ToolLayout";
+import { Button } from "@/components/ui/Button";
+import { Copy, Database, Code, Settings } from "lucide-react";
 import { format } from "sql-formatter";
-import ToolLinks from "@/components/ToolLinks";
-import { ALL_TOOLS } from "@/lib/tools";
-import FAQSection from "@/components/FAQSection";
 
-const faqs = [
-    { question: "Does it change the SQL logic?", questionHi: "क्या यह SQL की लॉजिक बदलता है?", answer: "No, only formatting changes. SQL query functionality stays the same.", answerHi: "नहीं, सिर्फ़ फ़ॉर्मेटिंग बदलती है। SQL क्वेरी की कार्यक्षमता वही रहती है।" },
-    { question: "Which SQL dialects?", questionHi: "कौन से SQL डायलेक्ट?", answer: "Standard SQL, MySQL, PostgreSQL, and more.", answerHi: "स्टैंडर्ड SQL, MySQL, PostgreSQL और अन्य।" },
-];
-
-export default function SqlFormatterPage() {
-    const locale = useLocale();
-    const isHi = locale === "hi";
-
-    const [input, setInput] = useState("");
-    const [output, setOutput] = useState("");
-    const [dialect, setDialect] = useState<"sql" | "postgresql" | "mysql">("sql");
+export default function SqlFormatterTool() {
+    const [sqlInput, setSqlInput] = useState("SELECT id, name, email FROM users WHERE status = 'active' ORDER BY created_at DESC LIMIT 10;");
+    const [sqlOutput, setSqlOutput] = useState("");
+    const [dialect, setDialect] = useState<"sql" | "mysql" | "postgresql">("sql");
+    const [keywordCase, setKeywordCase] = useState<"upper" | "lower" | "preserve">("upper");
+    const [error, setError] = useState("");
     const [copied, setCopied] = useState(false);
 
-    const handleFormat = () => {
+    // Auto-format when inputs change
+    useEffect(() => {
         try {
-            const formatted = format(input, {
+            setError("");
+            if (!sqlInput.trim()) {
+                setSqlOutput("");
+                return;
+            }
+            const formatted = format(sqlInput, {
                 language: dialect,
-                tabWidth: 2,
-                keywordCase: "upper",
+                keywordCase: keywordCase,
+                indentStyle: "standard",
+                tabWidth: 4,
+                linesBetweenQueries: 2,
             });
-            setOutput(formatted);
-        } catch (error) {
-            setOutput("Error formatting SQL: " + (error as Error).message);
+            setSqlOutput(formatted);
+        } catch (e: any) {
+            setError(`Formatting Error: ${e.message}`);
         }
-    };
+    }, [sqlInput, dialect, keywordCase]);
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(output);
+        navigator.clipboard.writeText(sqlOutput);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
 
     return (
-        <div className="animate-fade-in space-y-8">
-            <div className="text-center">
-                <h1 className="section-title">{isHi ? "💾 SQL फ़ॉर्मेटर" : "💾 SQL Formatter"}</h1>
-                <p className="mt-2 text-slate-400">{isHi ? "SQL क्वेरी को सुंदर और पढ़ने लायक बनाएँ" : "Beautify your SQL queries instantly"}</p>
-            </div>
-
-            <div className="glass-card max-w-6xl mx-auto space-y-4">
-                <div className="flex flex-wrap gap-4 justify-between items-center bg-slate-800/50 p-3 rounded-lg border border-slate-700">
-                    <div className="flex items-center gap-2">
-                        <span className="text-slate-400 text-sm">{isHi ? "डायलेक्ट:" : "Dialect:"}</span>
+        <ToolLayout
+            title="SQL Formatter"
+            description="Prettify minified or poorly formatted SQL queries into highly readable syntax instantly."
+           
+        >
+            <div className="max-w-7xl mx-auto flex flex-col space-y-6">
+                
+                {/* Toolbar */}
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between glass-card px-6 py-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm gap-4">
+                    
+                    {/* Settings Group */}
+                    <div className="flex items-center space-x-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+                        <div className="flex items-center space-x-2 mr-2">
+                            <Settings className="w-5 h-5 text-indigo-500" />
+                            <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Format Options:</span>
+                        </div>
+                        
+                        {/* Dialect */}
                         <select
                             value={dialect}
                             onChange={(e) => setDialect(e.target.value as any)}
-                            className="bg-slate-900 border border-slate-600 rounded px-2 py-1 text-sm text-white focus:ring-1 focus:ring-indigo-500"
+                            className="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block px-3 py-1.5"
                         >
                             <option value="sql">Standard SQL</option>
-                            <option value="postgresql">PostgreSQL</option>
                             <option value="mysql">MySQL</option>
+                            <option value="postgresql">PostgreSQL</option>
+                        </select>
+
+                        {/* Keyword Case */}
+                        <select
+                            value={keywordCase}
+                            onChange={(e) => setKeywordCase(e.target.value as any)}
+                            className="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block px-3 py-1.5"
+                        >
+                            <option value="upper">UPPERCASE Keywords</option>
+                            <option value="lower">lowercase keywords</option>
+                            <option value="preserve">Preserve Original</option>
                         </select>
                     </div>
 
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => { setInput(""); setOutput(""); }}
-                            className="text-slate-400 hover:text-white px-3 py-1 text-sm"
-                        >
-                            {isHi ? "साफ़ करें" : "Clear"}
-                        </button>
-                        <button
-                            onClick={handleFormat}
-                            className="btn-primary py-1 px-4 text-sm"
-                        >
-                            {isHi ? "✨ फ़ॉर्मेट करें" : "✨ Format"}
-                        </button>
-                    </div>
+                    <Button variant="primary" size="sm" onClick={copyToClipboard} className="flex items-center shrink-0">
+                        {copied ? <Code className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+                        {copied ? "Copied!" : "Copy Formatted SQL"}
+                    </Button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[600px]">
-                    {/* Input */}
-                    <div className="flex flex-col h-full space-y-2">
-                        <label className="text-sm font-semibold text-slate-400">{isHi ? "इनपुट SQL" : "Input SQL"}</label>
+                {/* Editor Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
+                    
+                    {/* Left Pane - Input */}
+                    <div className="flex flex-col bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm relative focus-within:ring-2 focus-within:ring-indigo-500/50 transition-shadow">
+                        <div className="bg-slate-100 dark:bg-slate-800/80 px-4 py-2 flex items-center border-b border-slate-200 dark:border-slate-700">
+                            <Database className="w-4 h-4 text-slate-500 mr-2" />
+                            <span className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">Minified / Raw SQL Input</span>
+                        </div>
                         <textarea
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder="SELECT * FROM users WHERE ..."
-                            className="flex-1 bg-slate-900/80 border border-slate-700 rounded-lg p-4 font-mono text-sm text-slate-300 focus:ring-2 focus:ring-indigo-500/50 outline-none resize-none"
+                            value={sqlInput}
+                            onChange={(e) => setSqlInput(e.target.value)}
+                            className="flex-1 w-full bg-transparent p-6 font-mono text-sm leading-relaxed outline-none resize-none text-slate-800 dark:text-slate-200 placeholder-slate-400"
+                            placeholder="Paste your raw, unformatted SQL query here..."
+                            spellCheck={false}
                         />
                     </div>
 
-                    {/* Output */}
-                    <div className="flex flex-col h-full space-y-2 relative">
-                        <div className="flex justify-between items-center">
-                            <label className="text-sm font-semibold text-green-400">{isHi ? "फ़ॉर्मेट किया गया आउटपुट" : "Formatted Output"}</label>
-                            {output && (
-                                <button
-                                    onClick={copyToClipboard}
-                                    className="text-xs flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
-                                >
-                                    {copied ? (isHi ? "✅ कॉपी हो गया" : "✅ Copied") : (isHi ? "📋 कॉपी करें" : "📋 Copy")}
-                                </button>
+                    {/* Right Pane - Output */}
+                    <div className="flex flex-col bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm relative">
+                        <div className="bg-slate-950 px-4 py-2 flex items-center justify-between border-b border-slate-800">
+                            <div className="flex items-center">
+                                <Code className="w-4 h-4 text-emerald-400 mr-2" />
+                                <span className="text-xs font-bold tracking-wider text-emerald-500 uppercase">Prettified Output</span>
+                            </div>
+                            {error && (
+                                <span className="text-xs font-semibold text-red-400 truncate max-w-xs">{error}</span>
                             )}
                         </div>
-                        <pre className="flex-1 bg-slate-950 border border-indigo-500/20 rounded-lg p-4 font-mono text-sm text-green-300 overflow-auto whitespace-pre">
-                            {output || <span className="text-slate-600 select-none">{isHi ? "// फ़ॉर्मेट किया गया परिणाम यहाँ दिखाई देगा..." : "// Formatted result will appear here..."}</span>}
-                        </pre>
+                        <textarea
+                            value={sqlOutput}
+                            readOnly
+                            className="flex-1 w-full bg-transparent p-6 font-mono text-sm leading-relaxed outline-none resize-none text-emerald-400 placeholder-slate-600"
+                            placeholder="Formatted SQL will appear here..."
+                            spellCheck={false}
+                        />
                     </div>
                 </div>
-            </div>
 
-            <FAQSection items={faqs} />
-            <ToolLinks current="/sql-formatter" tools={ALL_TOOLS} />
-        </div>
+            </div>
+        </ToolLayout>
     );
 }

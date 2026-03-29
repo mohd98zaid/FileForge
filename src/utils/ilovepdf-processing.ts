@@ -54,13 +54,12 @@ async function processWithRawApi(
             files: [{ server_filename: serverFilename, filename: file.name }],
             ...params
         };
-        console.log("iLovePDF Process Body:", JSON.stringify(processBody, null, 2));
-
+        // Debug logging removed for production security
         await axios.post(`https://${server}/v1/process`, processBody, {
             headers: authHeaders,
             params: { public_key: PUBLIC_KEY }
         });
-        console.log("iLovePDF Process Initiated");
+        // Debug logging removed for production
 
         // 4. Download
         const downloadRes = await axios.get(`https://${server}/v1/download/${task}`, {
@@ -103,8 +102,6 @@ export async function convertOfficeToPdf(file: File): Promise<File> {
  * Using Raw API with 'officepdf' tool (handles bidirectional conversion).
  */
 export async function convertPdfToWord(file: File): Promise<File> {
-    console.log("Starting convertPdfToWord via Adobe PDF Services", { file: file.name, size: file.size });
-
     const formData = new FormData();
     formData.append("file", file);
 

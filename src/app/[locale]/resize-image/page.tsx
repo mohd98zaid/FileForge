@@ -129,7 +129,7 @@ export default function ResizeImagePage() {
                 ) : (
                     <div>
                         <label className="block text-sm text-slate-400 mb-1">{isHi ? "लक्ष्य आकार (KB)" : "Target Size (KB)"}</label>
-                        <input type="number" value={targetKB} onChange={(e) => setTargetKB(+e.target.value)} className="input-field" />
+                        <input type="number" value={targetKB} onChange={(e) => setTargetKB(Math.max(1, parseInt(e.target.value.replace(/^0+/, '') || '1', 10)))} className="input-field" />
                     </div>
                 )}
 

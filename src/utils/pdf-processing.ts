@@ -2,6 +2,17 @@ import JSZip from 'jszip';
 import { PDFDocument, degrees, rgb, StandardFonts } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 
+// Cache for Hindi font bytes to avoid re-fetching on every watermark call
+let cachedFontBytes: ArrayBuffer | null = null;
+
+async function getHindiFont(): Promise<ArrayBuffer> {
+    if (!cachedFontBytes) {
+        const fontUrl = 'https://fonts.gstatic.com/s/notosansdevanagari/v23/jizDREyVoH129L5qonvT-yHnWW2R312W_0hLpA.ttf';
+        cachedFontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
+    }
+    return cachedFontBytes as ArrayBuffer;
+}
+
 // Configure worker locally when needed or use dynamic import
 const setupPdfJs = async () => {
     const pdfjsLib = await import('pdfjs-dist');
@@ -42,8 +53,7 @@ export async function watermarkPdf(
     pdfDoc.registerFontkit(fontkit);
 
     // Fetch a font that supports Devanagari characters
-    const fontUrl = 'https://fonts.gstatic.com/s/notosansdevanagari/v23/jizDREyVoH129L5qonvT-yHnWW2R312W_0hLpA.ttf';
-    const fontBytes = await fetch(fontUrl).then(res => res.arrayBuffer());
+    const fontBytes = await getHindiFont();
 
     // Fallback to StandardFonts.HelveticaBold if the fetch fails
     let font;
@@ -61,8 +71,9 @@ export async function watermarkPdf(
 
     pages.forEach(page => {
         const { width, height } = page.getSize();
+        const textWidth = font.widthOfTextAtSize(text, size);
         page.drawText(text, {
-            x: width / 2 - (text.length * size) / 4, // Rough centering
+            x: (width - textWidth) / 2,
             y: height / 2,
             size,
             font,

@@ -193,7 +193,7 @@ export default function CompressImagePage() {
                                 min={10}
                                 max={10000}
                                 value={targetKb}
-                                onChange={(e) => setTargetKb(Math.max(10, +e.target.value))}
+                                onChange={(e) => setTargetKb(Math.max(10, parseInt(e.target.value.replace(/^0+/, '') || '10', 10)))}
                                 className="input-field w-32 text-center text-lg font-semibold"
                             />
                             <span className="text-slate-400 font-medium">KB</span>

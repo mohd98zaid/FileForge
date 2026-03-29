@@ -6,7 +6,7 @@ import { ALL_TOOLS } from "@/lib/tools";
 
 const en = {
     title: "About FileForge",
-    subtitle: "Your one-stop toolkit for images, PDFs, audio, and developer utilities — built with privacy at the core.",
+    subtitle: "Your one-stop toolkit for images, PDFs, audio, video, AI vision, and developer utilities — built with privacy at the core.",
 
     // Mission
     missionTitle: "Our Mission",
@@ -33,16 +33,20 @@ const en = {
 
     // What we offer
     offerTitle: "What We Offer",
-    imageSection: "Image Tools (15+)",
-    imageSectionDesc: "Resize, compress, convert, crop, rotate, change DPI, remove backgrounds, add watermarks, create GIFs, extract color palettes, and prepare photos for Indian exams and passports — all client-side.",
-    pdfSection: "PDF Tools (12+)",
-    pdfSectionDesc: "Merge, split, compress, add page numbers, watermark, eSign, extract images, reorder pages — all client-side with pdf-lib.",
-    officeSection: "Office Docs (9+)",
-    officeSectionDesc: "PDF to Word, PDF to PowerPoint, PDF to Excel, Word/PPT/Excel to PDF, Edit PDF (Sejda-style editor with shapes, text, highlights), HTML to PDF, and Translate PDF into 20+ languages.",
-    devSection: "Developer & Utility Tools (10+)",
-    devSectionDesc: "QR code generator, JSON↔CSV converter, SQL formatter, diff checker, unit converter, timestamp converter, currency converter, password generator, lorem ipsum, and a live Markdown editor.",
-    audioSection: "Audio & Video Tools",
-    audioSectionDesc: "Convert audio formats and extract audio from video files — processed locally using FFmpeg WebAssembly for complete privacy.",
+    imageSection: "Image Tools (30+)",
+    imageSectionDesc: "Resize, compress, convert, crop, rotate, change DPI, remove backgrounds, add watermarks, create GIFs, extract color palettes, steganography, meme maker, and prepare photos for Indian exams and passports — all client-side.",
+    pdfSection: "PDF Tools (25+)",
+    pdfSectionDesc: "Merge, split, compress, add page numbers, watermark, eSign, extract images, reorder, redact, form fill, grayscale, metadata viewer — all client-side with pdf-lib.",
+    officeSection: "Office Docs (12+)",
+    officeSectionDesc: "PDF to Word, PDF to PowerPoint, PDF to Excel, Word/PPT/Excel to PDF, Edit PDF (Sejda-style editor with shapes, text, highlights), HTML to PDF, Translate PDF into 20+ languages.",
+    devSection: "Developer & Utility Tools (50+)",
+    devSectionDesc: "QR & barcode generator, JSON↔CSV↔XML converters, SQL formatter, diff checker, text case converter, slug generator, regex tools, hash generators, JWT tools, UUID, Unix permissions, cron builder, and 30+ more.",
+    audioSection: "Audio Tools (7+)",
+    audioSectionDesc: "Audio converter, recorder, trimmer, mixer, BPM counter, waveform viewer, audio visualizer — all processed locally using FFmpeg WebAssembly for complete privacy.",
+    videoSection: "Video Tools (8+)",
+    videoSectionDesc: "Video trimmer, GIF converter, compressor, frame extractor, watermark, green screen, mute, subtitle burner — all using FFmpeg WASM locally.",
+    aiSection: "AI-Powered Tools (8+)",
+    aiSectionDesc: "Background removal (ONNX), face detection, pose estimation, object detection, image classifier, OCR, style transfer, Instagram filters — all run in your browser with TensorFlow.js.",
 
     // Technology
     techTitle: "How It Works",
@@ -91,16 +95,20 @@ const hi = {
 
     // What we offer
     offerTitle: "हम क्या देते हैं",
-    imageSection: "इमेज टूल्स (15+)",
-    imageSectionDesc: "रिसाइज़, कंप्रेस, कन्वर्ट, क्रॉप, रोटेट, DPI बदलें, बैकग्राउंड हटाएँ, वॉटरमार्क लगाएँ, GIF बनाएँ, कलर पैलेट निकालें, और परीक्षा व पासपोर्ट फ़ोटो तैयार करें — सब ब्राउज़र में।",
-    pdfSection: "PDF टूल्स (12+)",
-    pdfSectionDesc: "मर्ज, स्प्लिट, कंप्रेस, पेज नंबर लगाएँ, वॉटरमार्क, ई-साइन, इमेज निकालें, पेज का क्रम बदलें — सब कुछ pdf-lib से ब्राउज़र में।",
-    officeSection: "ऑफ़िस डॉक्स (9+)",
+    imageSection: "इमेज टूल्स (30+)",
+    imageSectionDesc: "रिसाइज़, कंप्रेस, कन्वर्ट, क्रॉप, रोटेट, DPI बदलें, बैकग्राउंड हटाएँ, वॉटरमार्क लगाएँ, GIF बनाएँ, कलर पैलेट निकालें, steganography, meme maker, और परीक्षा व पासपोर्ट फ़ोटो तैयार करें — सब ब्राउज़र में।",
+    pdfSection: "PDF टूल्स (25+)",
+    pdfSectionDesc: "मर्ज, स्प्लिट, कंप्रेस, पेज नंबर लगाएँ, वॉटरमार्क, ई-साइन, इमेज निकालें, पेज का क्रम बदलें, रिडैक्शन, फ़ॉर्म फ़िल, ग्रेस्केल, मेटाडेटा व्यूअर — सब कुछ pdf-lib से ब्राउज़र में।",
+    officeSection: "ऑफ़िस डॉक्स (12+)",
     officeSectionDesc: "PDF से Word, PowerPoint, Excel में कन्वर्ट करें। Word/PPT/Excel से PDF बनाएँ। Sejda जैसा PDF एडिटर — शेप, टेक्स्ट, हाइलाइट के साथ। HTML से PDF और PDF का 20+ भाषाओं में अनुवाद।",
-    devSection: "डेवलपर और यूटिलिटी टूल्स (10+)",
-    devSectionDesc: "QR कोड जनरेटर, JSON↔CSV कन्वर्टर, SQL फ़ॉर्मेटर, डिफ़ चेकर, यूनिट कन्वर्टर, टाइमस्टैम्प कन्वर्टर, करेंसी कन्वर्टर, पासवर्ड जनरेटर, लोरेम इप्सम और लाइव मार्कडाउन एडिटर।",
-    audioSection: "ऑडियो और वीडियो टूल्स",
-    audioSectionDesc: "ऑडियो फ़ॉर्मेट कन्वर्ट करें और वीडियो से ऑडियो निकालें — FFmpeg WebAssembly के ज़रिए सब कुछ आपके ब्राउज़र में ही होता है।",
+    devSection: "डेवलपर और यूटिलिटी टूल्स (50+)",
+    devSectionDesc: "QR & बारकोड जनरेटर, JSON↔CSV↔XML कन्वर्टर, SQL फ़ॉर्मेटर, डिफ़ चेकर, टेक्स्ट केस कन्वर्टर, स्लग जनरेटर, रेगेक्स टूल्स, हैश जनरेटर, JWT टूल्स, UUID, Unix अनुमतियाँ, cron बिल्डर, और 30+ और।",
+    audioSection: "ऑडियो टूल्स (7+)",
+    audioSectionDesc: "ऑडियो कन्वर्टर, रिकॉर्डर, ट्रिमर, मिक्सर, BPM काउंटर, वेवफ़ॉर्म व्यूअर, ऑडियो विज़ुअलाइज़र — FFmpeg WebAssembly के ज़रिए सब कुछ आपके ब्राउज़र में।",
+    videoSection: "वीडियो टूल्स (8+)",
+    videoSectionDesc: "वीडियो ट्रिमर, GIF कन्वर्टर, कंप्रेसर, फ़्रेम एक्सट्रैक्टर, वॉटरमार्क, ग्रीन स्क्रीन, म्यूट, सबटाइटल बर्नर — FFmpeg WASM से सब लोकल।",
+    aiSection: "AI-संचालित टूल्स (8+)",
+    aiSectionDesc: "बैकग्राउंड रिमूवल (ONNX), फ़ेस डिटेक्शन, पोज़ एस्टिमेशन, ऑब्जेक्ट डिटेक्शन, इमेज क्लासिफ़ायर, OCR, स्टाइल ट्रांसफ़र, इंस्टाग्राम फ़िल्टर — सब TensorFlow.js के साथ आपके ब्राउज़र में।",
 
     // Technology
     techTitle: "यह कैसे काम करता है",
@@ -189,6 +197,8 @@ export default function AboutPage() {
                         { title: t.officeSection, desc: t.officeSectionDesc, icon: "🗂️", color: "text-amber-400" },
                         { title: t.devSection, desc: t.devSectionDesc, icon: "🛠️", color: "text-emerald-400" },
                         { title: t.audioSection, desc: t.audioSectionDesc, icon: "🎵", color: "text-purple-400" },
+                        { title: t.videoSection, desc: t.videoSectionDesc, icon: "🎬", color: "text-cyan-400" },
+                        { title: t.aiSection, desc: t.aiSectionDesc, icon: "🤖", color: "text-pink-400" },
                     ].map((section) => (
                         <div key={section.title} className="glass-card p-6">
                             <div className="flex items-center gap-3 mb-3">
